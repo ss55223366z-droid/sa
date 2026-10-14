@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMR SYSTEM</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: #00ff66;
+  font-family: Consolas, monospace;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .4;
+}
+
+.screen {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #ff243d;
+  font-size: clamp(28px, 5vw, 52px);
+  text-shadow: 0 0 18px red;
+  animation: blink 1.5s infinite;
+}
+
+.logo {
+  direction: ltr;
+  font-size: clamp(80px, 15vw, 150px);
+  font-weight: bold;
+  letter-spacing: 12px;
+  color: white;
+  text-shadow: 0 0 15px #00ff66,
+               0 0 40px #00ff66;
+}
+
+.line {
+  width: min(500px, 85vw);
+  height: 2px;
+  background: #00ff66;
+  box-shadow: 0 0 15px #00ff66;
+  margin: 25px 0;
+}
+
+#data {
+  direction: ltr;
+  text-align: left;
+  width: min(600px, 90vw);
+  color: #00ff66;
+  font-size: 12px;
+  line-height: 1.8;
+  overflow: hidden;
+}
+
+.status {
+  color: #aaffbb;
+  margin: 10px;
+}
+
+@keyframes blink {
+  50% { opacity: .65; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="screen">
+  <h1>تم تشفير جهازك</h1>
+
+  <div class="status">
+    SYSTEM STATUS: ENCRYPTION DETECTED
+  </div>
+
+  <div class="logo">SMR</div>
+
+  <div class="line"></div>
+
+  <div class="status">
+    CORE: ACTIVE | DATA STREAM: RUNNING
+  </div>
+
+  <div id="data"></div>
+</div>
+
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+let drops = [];
+
+function resize() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+
+  drops = Array(Math.ceil(canvas.width / 16))
+    .fill(1);
+}
+
+window.addEventListener("resize", resize);
+resize();
+
+const chars = "010101SMRABCDEF#$%&";
+
+function animate() {
+  ctx.fillStyle = "rgba(0,0,0,0.09)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ff66";
+  ctx.font = "14px Consolas";
+
+  drops.forEach((y, i) => {
+    const char = chars[
+      Math.floor(Math.random() * chars.length)
+    ];
+
+    ctx.fillText(char, i * 16, y * 16);
+
+    if (y * 16 > canvas.height && Math.random() > .97) {
+      drops[i] = 0;
+    }
+
+    drops[i]++;
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+const output = document.getElementById("data");
+
+const messages = [
+  "[SMR] Initializing system...",
+  "[SYS] Checking virtual memory... OK",
+  "[NET] Data stream initialized...",
+  "[CORE] Monitoring system status...",
+  "[DATA] 01010110 10100101 11001010",
+  "[SYS] Updating virtual process table...",
+  "[SMR] Secure console active..."
+];
+
+let index = 0;
+
+function updateData() {
+  const line = document.createElement("div");
+
+  line.textContent =
+    new Date().toLocaleTimeString("en-GB") +
+    "  " + messages[index % messages.length];
+
+  output.appendChild(line);
+  index++;
+
+  while (output.children.length > 6) {
+    output.removeChild(output.firstChild);
+  }
+
+  setTimeout(updateData, 500 + Math.random() * 700);
+}
+
+updateData();
+
+// دبل كليك لملء الشاشة
+document.addEventListener("dblclick", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen()
+      .catch(() => {});
+  }
+});
+
+// Esc للخروج من ملء الشاشة
+</script>
+
+</body>
+</html>
