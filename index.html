@@ -1,200 +1,116 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SMR SYSTEM</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #000;
-  color: #00ff66;
-  font-family: Consolas, monospace;
-  overflow: hidden;
-}
-
-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: .4;
-}
-
-.screen {
-  position: relative;
-  z-index: 2;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-}
-
-h1 {
-  color: #ff243d;
-  font-size: clamp(28px, 5vw, 52px);
-  text-shadow: 0 0 18px red;
-  animation: blink 1.5s infinite;
-}
-
-.logo {
-  direction: ltr;
-  font-size: clamp(80px, 15vw, 150px);
-  font-weight: bold;
-  letter-spacing: 12px;
-  color: white;
-  text-shadow: 0 0 15px #00ff66,
-               0 0 40px #00ff66;
-}
-
-.line {
-  width: min(500px, 85vw);
-  height: 2px;
-  background: #00ff66;
-  box-shadow: 0 0 15px #00ff66;
-  margin: 25px 0;
-}
-
-#data {
-  direction: ltr;
-  text-align: left;
-  width: min(600px, 90vw);
-  color: #00ff66;
-  font-size: 12px;
-  line-height: 1.8;
-  overflow: hidden;
-}
-
-.status {
-  color: #aaffbb;
-  margin: 10px;
-}
-
-@keyframes blink {
-  50% { opacity: .65; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة الأمل لتنظيف وصيانة الأفران بالرياض</title>
+    <!-- استدعاء مكتبة Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
 </head>
+<body class="bg-gray-50 text-gray-800">
 
-<body>
+    <!-- الشريط العلوي / الهيدر -->
+    <header class="bg-blue-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2 space-x-reverse">
+                <i class="fa-solid fa-fire-flame-curved text-orange-400 text-2xl"></i>
+                <span class="text-xl font-bold tracking-wide">شركة الأمل</span>
+            </div>
+            <div class="text-sm bg-blue-800 px-3 py-1.5 rounded-full border border-blue-700">
+                <i class="fa-solid fa-location-dot text-orange-400 ml-1"></i> الرياض - السعودية
+            </div>
+        </div>
+    </header>
 
-<canvas id="matrix"></canvas>
+    <!-- القسم الرئيسي (Hero Section) -->
+    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 text-white py-16 px-4 text-center">
+        <div class="container mx-auto max-w-3xl">
+            <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-4">خدمة احترافية مع الضمان</span>
+            <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
+                أفضل خدمات تنظيف وصيانة الأفران <span class="text-orange-400">بالرياض</span>
+            </h1>
+            <p class="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed">
+                نرجع فرنك كالجد تماماً! إزالة الدهون المستعصية، صيانة الأجزاء الفنية، وتصليح الشعلات بأعلى جودة وبيد فنيين متخصصين.
+            </p>
+            
+            <!-- أزرار الاتصال السريع -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="tel:966539516268" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transition duration-300 flex items-center justify-center space-x-2 space-x-reverse text-lg">
+                    <i class="fa-solid fa-phone-volume text-xl"></i>
+                    <span>اتصل الآن</span>
+                </a>
+                <a href="https://wa.me/966539516268" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transition duration-300 flex items-center justify-center space-x-2 space-x-reverse text-lg">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>محادثة واتساب</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
-<div class="screen">
-  <h1>تم تشفير جهازك</h1>
+    <!-- قسم مميزاتنا -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-center text-blue-900 mb-12">لماذا يختارنا أهالي الرياض؟</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- ميزة 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-broom"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-blue-900">تنظيف عميق وشامل</h3>
+                    <p class="text-gray-600 text-sm">إذابة الدهون والزيوت المتراكمة داخل الفرن والهيكل الخارجي بأمان تام.</p>
+                </div>
+                <!-- ميزة 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-blue-900">صيانة وصيانة قطع الغيار</h3>
+                    <p class="text-gray-600 text-sm">فحص وإصلاح الشعلات، المفصلات، والحرارة بأعلى كفاءة لضمان الأمان.</p>
+                </div>
+                <!-- ميزة 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-blue-900">سرعة في الاستجابة</h3>
+                    <p class="text-gray-600 text-sm">فريقنا جاهز للوصول إليك في أي حي من أحياء الرياض في أسرع وقت.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="status">
-    SYSTEM STATUS: ENCRYPTION DETECTED
-  </div>
+    <!-- قسم اتصل بنا التمهيدي -->
+    <section class="bg-blue-50 py-12 px-4 border-t border-b border-blue-100 text-center">
+        <div class="container mx-auto max-w-2xl">
+            <h2 class="text-2xl font-bold text-blue-900 mb-4">هل تعاني من أعطال أو أوساخ في فرنك؟</h2>
+            <p class="text-gray-600 mb-6">لا تقلق، فريق شركة الأمل بالخدمة طوال أيام الأسبوع لخدمتك بالرياض.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="tel:966539516268" class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center space-x-2 space-x-reverse">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>اتصل الآن: 966539516268+</span>
+                </a>
+                <a href="https://wa.me/966539516268" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center space-x-2 space-x-reverse">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>راسلنا واتساب مباشرة</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
-  <div class="logo">SMR</div>
-
-  <div class="line"></div>
-
-  <div class="status">
-    CORE: ACTIVE | DATA STREAM: RUNNING
-  </div>
-
-  <div id="data"></div>
-</div>
-
-<script>
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
-
-let drops = [];
-
-function resize() {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-
-  drops = Array(Math.ceil(canvas.width / 16))
-    .fill(1);
-}
-
-window.addEventListener("resize", resize);
-resize();
-
-const chars = "010101SMRABCDEF#$%&";
-
-function animate() {
-  ctx.fillStyle = "rgba(0,0,0,0.09)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "#00ff66";
-  ctx.font = "14px Consolas";
-
-  drops.forEach((y, i) => {
-    const char = chars[
-      Math.floor(Math.random() * chars.length)
-    ];
-
-    ctx.fillText(char, i * 16, y * 16);
-
-    if (y * 16 > canvas.height && Math.random() > .97) {
-      drops[i] = 0;
-    }
-
-    drops[i]++;
-  });
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-const output = document.getElementById("data");
-
-const messages = [
-  "[SMR] Initializing system...",
-  "[SYS] Checking virtual memory... OK",
-  "[NET] Data stream initialized...",
-  "[CORE] Monitoring system status...",
-  "[DATA] 01010110 10100101 11001010",
-  "[SYS] Updating virtual process table...",
-  "[SMR] Secure console active..."
-];
-
-let index = 0;
-
-function updateData() {
-  const line = document.createElement("div");
-
-  line.textContent =
-    new Date().toLocaleTimeString("en-GB") +
-    "  " + messages[index % messages.length];
-
-  output.appendChild(line);
-  index++;
-
-  while (output.children.length > 6) {
-    output.removeChild(output.firstChild);
-  }
-
-  setTimeout(updateData, 500 + Math.random() * 700);
-}
-
-updateData();
-
-// دبل كليك لملء الشاشة
-document.addEventListener("dblclick", () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen()
-      .catch(() => {});
-  }
-});
-
-// Esc للخروج من ملء الشاشة
-</script>
+    <!-- الفوتر -->
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm">
+        <div class="container mx-auto px-4">
+            <p>جميع الحقوق محفوظة © 2026 - شركة الأمل لتنظيف وصيانة الأفران بالرياض</p>
+        </div>
+    </footer>
 
 </body>
 </html>
